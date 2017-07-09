@@ -2,6 +2,7 @@ package infrastructure.persistence;
 
 import domain.model.Employee;
 import domain.model.EmployeeRepository;
+import domain.model.RepositoryAccessException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,9 +43,8 @@ public class FileEmployeeRepository implements EmployeeRepository{
             return stream.map(parseEmployee)
                     .filter(employee -> employee.birthdayIsOn(monthDay))
                     .collect(Collectors.toList());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
+        } catch (Exception e) {
+            throw new RepositoryAccessException("Error reading the repository file", e);
         }
     }
 }
