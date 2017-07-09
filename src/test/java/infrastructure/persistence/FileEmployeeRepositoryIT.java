@@ -4,6 +4,9 @@ import domain.model.Employee;
 import domain.model.EmployeeBuilder;
 import org.junit.Test;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.List;
@@ -16,9 +19,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FileEmployeeRepositoryIT {
 
     @Test
-    public void should_return_employees_born_on_a_given_date(){
+    public void should_return_employees_born_on_a_given_date() throws URISyntaxException {
         //Given
-        String file = getClass().getClassLoader().getResource("employees.csv").getFile();
+        URI uri = getClass().getClassLoader().getResource("employees.csv").toURI();
+        String file = Paths.get(uri).toString();
+
         FileEmployeeRepository repository = new FileEmployeeRepository(file);
 
         //When

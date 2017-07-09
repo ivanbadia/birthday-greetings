@@ -1,6 +1,7 @@
 package domain.model;
 
 import java.time.LocalDate;
+import java.time.MonthDay;
 import java.util.Objects;
 
 /**
@@ -60,5 +61,9 @@ public class Employee {
         sb.append(", email='").append(email).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public boolean birthdayIsOn(MonthDay monthDay) {
+        return dateOfBirth.getMonth().equals(monthDay.getMonth()) && dateOfBirth.getDayOfMonth()==monthDay.getDayOfMonth();
     }
 }
