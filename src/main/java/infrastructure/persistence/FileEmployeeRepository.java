@@ -4,13 +4,11 @@ import domain.model.Employee;
 import domain.model.EmployeeRepository;
 import domain.model.RepositoryAccessException;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -19,10 +17,10 @@ import java.util.stream.Stream;
 
 public class FileEmployeeRepository implements EmployeeRepository{
     private static final DateTimeFormatter BIRTH_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-    public static final int FIRST_NAME_POSITION = 1;
-    public static final int LAST_NAME_POSITION = 0;
-    public static final int BIRTH_DATE_POSITION = 2;
-    public static final int EMAIL_POSITION = 3;
+    private static final int FIRST_NAME_POSITION = 1;
+    private static final int LAST_NAME_POSITION = 0;
+    private static final int BIRTH_DATE_POSITION = 2;
+    private static final int EMAIL_POSITION = 3;
 
     private final String file;
 

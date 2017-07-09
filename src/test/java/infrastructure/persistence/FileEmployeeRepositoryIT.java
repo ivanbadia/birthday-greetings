@@ -20,10 +20,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class FileEmployeeRepositoryIT {
 
+    public static final String VALID_EMPLOYEES_FILE = "employees.csv";
+    public static final String INVALID_EMPLOYEES_FILE = "invalid_employees.csv";
+
     @Test
     public void should_return_employees_born_on_a_given_date() throws URISyntaxException {
         //Given
-        FileEmployeeRepository repository = new FileEmployeeRepository(validEmployeesFile());
+        FileEmployeeRepository repository = new FileEmployeeRepository(pathOf(VALID_EMPLOYEES_FILE));
 
         //When
         List<Employee> employees = repository.findEmployeesBornOn(MonthDay.of(10, 8));
@@ -41,7 +44,7 @@ public class FileEmployeeRepositoryIT {
     @Test
     public void should_fail_if_file_is_not_valid() throws URISyntaxException {
         //Given
-        FileEmployeeRepository repository = new FileEmployeeRepository(invalidEmployeesFile());
+        FileEmployeeRepository repository = new FileEmployeeRepository(pathOf(INVALID_EMPLOYEES_FILE));
 
         //When
         Throwable throwable = Assertions.catchThrowable(() -> repository.findEmployeesBornOn(MonthDay.now()));
@@ -53,15 +56,10 @@ public class FileEmployeeRepositoryIT {
 
     }
 
-    private String validEmployeesFile() throws URISyntaxException {
-        String fileName = "employees.csv";
+
+    private String pathOf(String fileName) throws URISyntaxException {
         URI uri = getClass().getClassLoader().getResource(fileName).toURI();
         return Paths.get(uri).toString();
     }
 
-    private String invalidEmployeesFile() throws URISyntaxException {
-        String fileName = "invalid_employees.csv";
-        URI uri = getClass().getClassLoader().getResource(fileName).toURI();
-        return Paths.get(uri).toString();
-    }
 }
