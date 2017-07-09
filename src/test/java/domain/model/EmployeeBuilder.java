@@ -25,4 +25,24 @@ public class EmployeeBuilder {
         this.email = email;
         return this;
     }
+
+    public EmployeeBuilder withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+
+    public EmployeeBuilder withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public EmployeeBuilder withDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+        return this;
+    }
+
+    public static EmployeeBuilder builder() {
+        return new EmployeeBuilder();
+    }
 }
