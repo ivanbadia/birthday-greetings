@@ -8,12 +8,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.Collections;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BirthdayGreeterTest {
@@ -33,14 +35,17 @@ public class BirthdayGreeterTest {
     @Test
     public void should_send_a_greetings_email_to_the_employees_whose_birthday_is_today(){
         //SetUp
-        Mockito.when(clock.today()).thenReturn(LocalDate.of(2017, 7, 9));
-        Employee employee = new Employee("John", "Doe", LocalDate.of(2016, 7, 9), "john.doe@foobar.com");
-        Mockito.when(employeeRepository.findEmployeesBornOn(MonthDay.of(7, 9))).thenReturn(Collections.singletonList(employee));
+        int month = 7;
+        int dayOfMonth = 9;
+        LocalDate today = LocalDate.of(2017, month, dayOfMonth);
+        when(clock.today()).thenReturn(today);
+        Employee employee = new Employee("John", "Doe", LocalDate.of(2016, month, dayOfMonth), "john.doe@foobar.com");
+        when(employeeRepository.findEmployeesBornOn(MonthDay.of(month, dayOfMonth))).thenReturn(Collections.singletonList(employee));
 
         //When
         birthdayGreeter.sendGreetings();
 
         //Then
-        Mockito.verify(greetingsSender).sendGreetingsTo(employee);
+        verify(greetingsSender).sendGreetingsTo(employee);
     }
 }
