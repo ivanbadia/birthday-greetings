@@ -8,8 +8,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.time.LocalDate;
-
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -22,10 +20,10 @@ public class EmailGreetingsSenderTest {
     private EmailGreetingsSender emailGreetingsSender;
 
     @Test
-    public void greetings_email_should_be_sent() throws Exception {
+    public void greetings_email_should_be_sent(){
         //Given
         String email = "john.doe@foobar.com";
-        Employee employee = new Employee("John", "Doe", LocalDate.of(2016, 1, 1), email);
+        Employee employee = new EmployeeBuilder().withEmail(email).build();
 
         //When
         emailGreetingsSender.sendGreetingsTo(employee);

@@ -1,6 +1,7 @@
 package application;
 
 import domain.model.Employee;
+import domain.model.EmployeeBuilder;
 import domain.model.EmployeeRepository;
 import domain.model.GreetingsSender;
 import infrastructure.time.Clock;
@@ -39,7 +40,7 @@ public class BirthdayGreeterTest {
         int dayOfMonth = 9;
         LocalDate today = LocalDate.of(2017, month, dayOfMonth);
         when(clock.today()).thenReturn(today);
-        Employee employee = new Employee("John", "Doe", LocalDate.of(2016, month, dayOfMonth), "john.doe@foobar.com");
+        Employee employee = EmployeeBuilder.anEmployee();
         when(employeeRepository.findEmployeesBornOn(MonthDay.of(month, dayOfMonth))).thenReturn(Collections.singletonList(employee));
 
         //When
