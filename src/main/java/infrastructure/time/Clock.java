@@ -8,6 +8,6 @@ import java.time.LocalDate;
 public class Clock {
 
     public LocalDate today(){
-        return null;
+        return LocalDate.now();
     }
 }
