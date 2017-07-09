@@ -50,4 +50,15 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(firstName, lastName, dateOfBirth, email);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Employee{");
+        sb.append("firstName='").append(firstName).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", dateOfBirth=").append(dateOfBirth);
+        sb.append(", email='").append(email).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
