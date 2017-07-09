@@ -2,6 +2,8 @@ package infrastructure.persistence;
 
 import domain.model.Employee;
 import domain.model.EmployeeBuilder;
+import domain.model.RepositoryAccessException;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.net.URI;
@@ -21,7 +23,7 @@ public class FileEmployeeRepositoryIT {
     @Test
     public void should_return_employees_born_on_a_given_date() throws URISyntaxException {
         //Given
-        FileEmployeeRepository repository = new FileEmployeeRepository(employeesFile());
+        FileEmployeeRepository repository = new FileEmployeeRepository(validEmployeesFile());
 
         //When
         List<Employee> employees = repository.findEmployeesBornOn(MonthDay.of(10, 8));
@@ -36,8 +38,30 @@ public class FileEmployeeRepositoryIT {
 
     }
 
-    private String employeesFile() throws URISyntaxException {
-        URI uri = getClass().getClassLoader().getResource("employees.csv").toURI();
+    @Test
+    public void should_fail_if_file_is_not_valid() throws URISyntaxException {
+        //Given
+        FileEmployeeRepository repository = new FileEmployeeRepository(invalidEmployeesFile());
+
+        //When
+        Throwable throwable = Assertions.catchThrowable(() -> repository.findEmployeesBornOn(MonthDay.now()));
+
+        //Then
+        assertThat(throwable)
+                .isNotNull()
+                .isInstanceOf(RepositoryAccessException.class);
+
+    }
+
+    private String validEmployeesFile() throws URISyntaxException {
+        String fileName = "employees.csv";
+        URI uri = getClass().getClassLoader().getResource(fileName).toURI();
+        return Paths.get(uri).toString();
+    }
+
+    private String invalidEmployeesFile() throws URISyntaxException {
+        String fileName = "invalid_employees.csv";
+        URI uri = getClass().getClassLoader().getResource(fileName).toURI();
         return Paths.get(uri).toString();
     }
 }
