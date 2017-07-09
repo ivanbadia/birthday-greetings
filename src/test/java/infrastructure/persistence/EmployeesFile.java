@@ -26,6 +26,7 @@ public class EmployeesFile {
             URI uri = EmployeesFile.class.getClassLoader().getResource(fileName).toURI();
             return Paths.get(uri).toString();
         } catch (URISyntaxException e) {
+            throw new IllegalStateException("Test file "+fileName+" cannot be read", e);
         }
     }
 
