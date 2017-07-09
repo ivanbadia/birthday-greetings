@@ -30,8 +30,8 @@ public class FileEmployeeRepositoryIT {
         assertThat(employees)
                 .hasSize(2)
                 .containsExactly(
-                    EmployeeBuilder.builder().withLastName("Doe").withFirstName("John").withDateOfBirth(LocalDate.of(1982, 10, 8)).withEmail("john.doe@foobar.com").build(),
-                    EmployeeBuilder.builder().withLastName("Garcia").withFirstName("Pedro").withDateOfBirth(LocalDate.of(1980, 10, 8)).withEmail("pedro.garcia@foobar.com").build()
+                    new EmployeeBuilder().withLastName("Doe").withFirstName("John").withDateOfBirth(LocalDate.of(1982, 10, 8)).withEmail("john.doe@foobar.com").build(),
+                    new EmployeeBuilder().withLastName("Garcia").withFirstName("Pedro").withDateOfBirth(LocalDate.of(1980, 10, 8)).withEmail("pedro.garcia@foobar.com").build()
                     );
 
     }

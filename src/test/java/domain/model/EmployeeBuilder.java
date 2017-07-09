@@ -42,7 +42,4 @@ public class EmployeeBuilder {
         return this;
     }
 
-    public static EmployeeBuilder builder() {
-        return new EmployeeBuilder();
-    }
 }
