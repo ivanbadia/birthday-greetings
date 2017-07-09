@@ -20,7 +20,7 @@ public class EmailGreetingsSenderTest {
     private EmailGreetingsSender emailGreetingsSender;
 
     @Test
-    public void greetings_email_should_be_sent(){
+    public void should_send_greeting_email_to_employee(){
         //Given
         String email = "john.doe@foobar.com";
         Employee employee = new EmployeeBuilder().withEmail(email).build();
