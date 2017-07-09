@@ -3,33 +3,28 @@ package infrastructure.persistence;
 import domain.model.Employee;
 import domain.model.EmployeeBuilder;
 import domain.model.RepositoryAccessException;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.MonthDay;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 /**
  * Created by Ivan on 09/07/2017.
  */
 public class FileEmployeeRepositoryIT {
 
-    public static final String VALID_EMPLOYEES_FILE = "employees.csv";
-    public static final String INVALID_EMPLOYEES_FILE = "invalid_employees.csv";
-
     @Test
-    public void should_return_employees_born_on_a_given_date() throws URISyntaxException {
+    public void should_return_employees_born_on_a_given_date(){
         //Given
-        FileEmployeeRepository repository = new FileEmployeeRepository(pathOf(VALID_EMPLOYEES_FILE));
+        FileEmployeeRepository repository = new FileEmployeeRepository(EmployeesFile.path());
+        MonthDay date = MonthDay.of(10, 8);
 
         //When
-        List<Employee> employees = repository.findEmployeesBornOn(MonthDay.of(10, 8));
+        List<Employee> employees = repository.findEmployeesBornOn(date);
 
         //Then
         assertThat(employees)
@@ -42,12 +37,12 @@ public class FileEmployeeRepositoryIT {
     }
 
     @Test
-    public void should_fail_if_file_is_not_valid() throws URISyntaxException {
+    public void should_fail_if_file_is_not_valid() {
         //Given
-        FileEmployeeRepository repository = new FileEmployeeRepository(pathOf(INVALID_EMPLOYEES_FILE));
+        FileEmployeeRepository repository = new FileEmployeeRepository(EmployeesFile.pathOfInvalidFile());
 
         //When
-        Throwable throwable = Assertions.catchThrowable(() -> repository.findEmployeesBornOn(MonthDay.now()));
+        Throwable throwable = catchThrowable(() -> repository.findEmployeesBornOn(MonthDay.now()));
 
         //Then
         assertThat(throwable)
@@ -57,9 +52,5 @@ public class FileEmployeeRepositoryIT {
     }
 
 
-    private String pathOf(String fileName) throws URISyntaxException {
-        URI uri = getClass().getClassLoader().getResource(fileName).toURI();
-        return Paths.get(uri).toString();
-    }
 
 }

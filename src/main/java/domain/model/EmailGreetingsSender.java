@@ -16,6 +16,7 @@ public class EmailGreetingsSender implements GreetingsSender {
 
     @Override
     public void sendGreetingsTo(Employee employee) {
+
         emailSender.send(birthdayGreetingsEmailFor(employee));
     }
 

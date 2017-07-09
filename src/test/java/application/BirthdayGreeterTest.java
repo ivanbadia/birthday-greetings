@@ -34,7 +34,7 @@ public class BirthdayGreeterTest {
     private BirthdayGreeter birthdayGreeter;
 
     @Test
-    public void should_send_a_greetings_email_to_the_employees_whose_birthday_is_today(){
+    public void should_send_a_greetings_message_to_the_employees_whose_birthday_is_today(){
         //SetUp
         int month = 7;
         int dayOfMonth = 9;
