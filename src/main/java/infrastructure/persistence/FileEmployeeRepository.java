@@ -2,7 +2,7 @@ package infrastructure.persistence;
 
 import domain.model.Employee;
 import domain.model.EmployeeRepository;
-import domain.model.RepositoryAccessException;
+import infrastructure.RepositoryAccessException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
