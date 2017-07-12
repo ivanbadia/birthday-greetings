@@ -2,7 +2,6 @@ package infrastructure.persistence;
 
 import domain.model.Employee;
 import domain.model.EmployeeBuilder;
-import infrastructure.RepositoryAccessException;
 import org.junit.Test;
 
 import java.time.LocalDate;
