@@ -1,4 +1,4 @@
-package domain.model;
+package domain.model.employee;
 
 import java.time.MonthDay;
 import java.util.List;

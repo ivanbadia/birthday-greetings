@@ -1,7 +1,7 @@
 package infrastructure.persistence;
 
-import domain.model.Employee;
-import domain.model.EmployeeRepository;
+import domain.model.employee.Employee;
+import domain.model.employee.EmployeeRepository;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

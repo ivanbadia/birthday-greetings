@@ -1,7 +1,7 @@
-package application;
+package domain.model.greetings;
 
-import domain.model.EmployeeRepository;
-import domain.model.GreetingsSender;
+import domain.model.employee.EmployeeRepository;
+import domain.model.greetings.GreetingsSender;
 import infrastructure.time.Clock;
 
 import java.time.LocalDate;

@@ -1,7 +1,6 @@
 package infrastructure.persistence;
 
-import domain.model.Employee;
-import domain.model.EmployeeBuilder;
+import domain.model.employee.Employee;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -16,34 +15,31 @@ import static org.assertj.core.api.Assertions.catchThrowable;
  */
 public class FileEmployeeRepositoryIT {
 
+    private static final Employee JOHN_DOE = new Employee("John", "Doe", LocalDate.of(1982, 10, 8), "john.doe@foobar.com");
+    private static final Employee PEDRO_GARCIA = new Employee("Pedro", "Garcia", LocalDate.of(1980, 10, 8), "pedro.garcia@foobar.com");
+
     @Test
     public void should_return_employees_born_on_a_given_date(){
-        //Given
         FileEmployeeRepository repository = new FileEmployeeRepository(EmployeesFile.path());
         MonthDay date = MonthDay.of(10, 8);
 
-        //When
         List<Employee> employees = repository.findEmployeesBornOn(date);
 
-        //Then
         assertThat(employees)
                 .hasSize(2)
+                .usingFieldByFieldElementComparator()
                 .containsExactly(
-                    new EmployeeBuilder().withLastName("Doe").withFirstName("John").withDateOfBirth(LocalDate.of(1982, 10, 8)).withEmail("john.doe@foobar.com").build(),
-                    new EmployeeBuilder().withLastName("Garcia").withFirstName("Pedro").withDateOfBirth(LocalDate.of(1980, 10, 8)).withEmail("pedro.garcia@foobar.com").build()
+                        JOHN_DOE,
+                        PEDRO_GARCIA
                     );
-
     }
 
     @Test
     public void should_fail_if_file_is_not_valid() {
-        //Given
         FileEmployeeRepository repository = new FileEmployeeRepository(EmployeesFile.pathOfInvalidFile());
 
-        //When
         Throwable throwable = catchThrowable(() -> repository.findEmployeesBornOn(MonthDay.now()));
 
-        //Then
         assertThat(throwable)
                 .isNotNull()
                 .isInstanceOf(RepositoryAccessException.class);

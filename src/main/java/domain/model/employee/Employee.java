@@ -1,8 +1,7 @@
-package domain.model;
+package domain.model.employee;
 
 import java.time.LocalDate;
 import java.time.MonthDay;
-import java.util.Objects;
 
 /**
  * Created by Ivan on 09/07/2017.
@@ -36,21 +35,6 @@ public class Employee {
         return email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(firstName, employee.firstName) &&
-                Objects.equals(lastName, employee.lastName) &&
-                Objects.equals(dateOfBirth, employee.dateOfBirth) &&
-                Objects.equals(email, employee.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, dateOfBirth, email);
-    }
 
     @Override
     public String toString() {

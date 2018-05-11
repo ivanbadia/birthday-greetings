@@ -1,5 +1,7 @@
 package domain.model;
 
+import domain.model.employee.Employee;
+
 import java.time.LocalDate;
 
 /**
@@ -12,8 +14,8 @@ public class EmployeeBuilder {
     private LocalDate dateOfBirth = LocalDate.of(1980, 9, 10);
     private String email = "john.doe@foobar.com";
 
-    public static Employee anEmployee(){
-        return new EmployeeBuilder().build();
+    public static EmployeeBuilder anEmployee(){
+        return new EmployeeBuilder();
     }
 
 

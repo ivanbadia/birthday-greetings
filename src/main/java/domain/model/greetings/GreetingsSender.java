@@ -1,4 +1,6 @@
-package domain.model;
+package domain.model.greetings;
+
+import domain.model.employee.Employee;
 
 /**
  * Created by Ivan on 09/07/2017.

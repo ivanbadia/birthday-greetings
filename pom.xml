@@ -26,6 +26,7 @@
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
+                        <include>**/*Should.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -44,6 +45,7 @@
                 <configuration>
                     <includes>
                         <include>**/*IT.java</include>
+                        <include>**/*Feature.java</include>
                     </includes>
                 </configuration>
             </plugin>

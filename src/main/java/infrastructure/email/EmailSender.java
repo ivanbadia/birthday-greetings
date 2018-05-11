@@ -1,5 +1,7 @@
 package infrastructure.email;
 
+import domain.model.greetings.email.Email;
+
 import java.util.logging.Logger;
 
 /**

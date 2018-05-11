@@ -1,4 +1,4 @@
-package infrastructure.email;
+package domain.model.greetings.email;
 
 import java.util.Objects;
 
