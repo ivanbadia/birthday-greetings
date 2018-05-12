@@ -27,7 +27,7 @@ public class EmailGreetingsSenderShould {
     }
 
     @Test
-    public void should_send_greeting_email_to_employee(){
+    public void send_greeting_email_to_employee(){
         String email = "john.doe@foobar.com";
         String name = "John";
         Employee employee = new EmployeeBuilder()
